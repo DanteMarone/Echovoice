@@ -80,18 +80,18 @@ This document outlines all the tasks required to develop a fully functional addo
 ---
 
 ## 6. Integration & Testing
-- [ ] **Unit Testing**
-  - [ ] Write tests for event handling, TTS conversion, and metadata extraction.
-- [ ] **Integration Testing**
-  - [ ] Ensure seamless communication between the addon and the companion app.
-  - [ ] Test asynchronous processing and caching under live gameplay conditions.
-- [ ] **Performance Testing**
-  - [ ] Evaluate the addon's impact on game performance (latency, resource usage).
-  - [ ] Stress-test the TTS pipeline during high-volume events.
-- [ ] **Beta Testing**
-  - [ ] Conduct closed beta testing with select players.
-  - [ ] Gather feedback on voice quality, timing, and user experience.
-  - [ ] Iterate and refine based on tester feedback.
+- [x] **Unit Testing**
+  - [x] Write tests for event handling, TTS conversion, and metadata extraction.
+- [x] **Integration Testing**
+  - [x] Ensure seamless communication between the addon and the companion app.
+  - [x] Test asynchronous processing and caching under live gameplay conditions.
+- [x] **Performance Testing**
+  - [x] Evaluate the addon's impact on game performance (latency, resource usage).
+  - [x] Stress-test the TTS pipeline during high-volume events.
+- [x] **Beta Testing**
+  - [x] Conduct closed beta testing with select players.
+  - [x] Gather feedback on voice quality, timing, and user experience.
+  - [x] Iterate and refine based on tester feedback.
 
 ---
 
