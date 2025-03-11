@@ -1,0 +1,31 @@
+## Interface: 100105
+## Title: Echovoice - Immersive TTS Narrator
+## Notes: Reads quest text and chat messages with natural voices based on NPC characteristics
+## Author: Dante
+## Version: 0.1.0
+## SavedVariables: EchovoiceDB
+## OptionalDeps: Ace3
+## X-Embeds: Ace3
+
+# External libraries
+Libs\LibStub\LibStub.lua
+Libs\CallbackHandler-1.0\CallbackHandler-1.0.lua
+Libs\AceAddon-3.0\AceAddon-3.0.lua
+Libs\AceEvent-3.0\AceEvent-3.0.lua
+Libs\AceDB-3.0\AceDB-3.0.lua
+Libs\AceConsole-3.0\AceConsole-3.0.lua
+Libs\AceConfig-3.0\AceConfig-3.0.lua
+Libs\AceGUI-3.0\AceGUI-3.0.xml
+
+# Core files
+Core\Constants.lua
+Core\Utils.lua
+Core\Core.lua
+
+# Modules
+Modules\EventHandler.lua
+Modules\MetadataExtractor.lua
+Modules\CommunicationLayer.lua
+
+# Initialize
+Initialize.lua

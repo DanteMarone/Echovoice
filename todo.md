@@ -19,18 +19,18 @@ This document outlines all the tasks required to develop a fully functional addo
 ---
 
 ## 2. WoW Addon Development (Lua)
-- [ ] **Addon Initialization**
-  - [ ] Create base addon structure using a framework (e.g., Ace3).
-  - [ ] Set up initial configuration files and metadata (.toc file).
-- [ ] **Event Hooking**
-  - [ ] Hook into WoW’s event system for quest and chat events.
-  - [ ] Implement event listeners to capture dialogue and NPC interactions.
-- [ ] **Metadata Extraction**
-  - [ ] Retrieve NPC details (ID, gender, race) to drive voice selection.
-  - [ ] Implement fallbacks for missing metadata.
-- [ ] **Communication Layer**
-  - [ ] Establish a secure local channel with the companion app.
-  - [ ] Design protocols for sending text and receiving audio cues.
+- [x] **Addon Initialization**
+  - [x] Create base addon structure using a framework (e.g., Ace3).
+  - [x] Set up initial configuration files and metadata (.toc file).
+- [x] **Event Hooking**
+  - [x] Hook into WoW's event system for quest and chat events.
+  - [x] Implement event listeners to capture dialogue and NPC interactions.
+- [x] **Metadata Extraction**
+  - [x] Retrieve NPC details (ID, gender, race) to drive voice selection.
+  - [x] Implement fallbacks for missing metadata.
+- [x] **Communication Layer**
+  - [x] Establish a secure local channel with the companion app.
+  - [x] Design protocols for sending text and receiving audio cues.
 
 ---
 
@@ -52,7 +52,7 @@ This document outlines all the tasks required to develop a fully functional addo
 
 ## 4. Companion Application (Windows)
 - [ ] **Companion App Development**
-  - [ ] Build a lightweight app to handle heavy TTS processing outside WoW’s sandbox.
+  - [ ] Build a lightweight app to handle heavy TTS processing outside WoW's sandbox.
   - [ ] Ensure compatibility with Windows 11.
 - [ ] **Local Communication Protocol**
   - [ ] Develop secure protocols (e.g., named pipes, local sockets) for data exchange.
@@ -86,7 +86,7 @@ This document outlines all the tasks required to develop a fully functional addo
   - [ ] Ensure seamless communication between the addon and the companion app.
   - [ ] Test asynchronous processing and caching under live gameplay conditions.
 - [ ] **Performance Testing**
-  - [ ] Evaluate the addon’s impact on game performance (latency, resource usage).
+  - [ ] Evaluate the addon's impact on game performance (latency, resource usage).
   - [ ] Stress-test the TTS pipeline during high-volume events.
 - [ ] **Beta Testing**
   - [ ] Conduct closed beta testing with select players.
@@ -109,7 +109,7 @@ This document outlines all the tasks required to develop a fully functional addo
 
 ## 8. Compliance & Security
 - [ ] **Blizzard Guidelines Compliance**
-  - [ ] Review and adhere to Blizzard’s addon policies.
+  - [ ] Review and adhere to Blizzard's addon policies.
   - [ ] Test thoroughly to avoid any policy violations.
 - [ ] **Security Measures**
   - [ ] Implement robust security for data transmission between the addon and companion app.
