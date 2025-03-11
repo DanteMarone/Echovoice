@@ -48,6 +48,13 @@ local defaults = {
                 enableEmote = false,
             },
         },
+        accessibility = {
+            enableSubtitles = true,
+            subtitleFontSize = 12,
+            enableTranscripts = false,
+            pauseDuringCombat = true,
+            voiceCommands = false,
+        },
     },
 }
 
@@ -58,6 +65,13 @@ Echovoice.communicationLayer = nil
 Echovoice.ttsEngine = nil
 Echovoice.voiceMapping = nil
 Echovoice.audioCache = nil
+
+-- UI module references
+Echovoice.configUI = nil
+Echovoice.subtitleUI = nil
+Echovoice.transcriptUI = nil
+Echovoice.minimapIcon = nil
+Echovoice.voiceCommands = nil
 
 -- OnInitialize: Called when the addon is loaded
 function Echovoice:OnInitialize()
@@ -76,7 +90,7 @@ end
 
 -- OnEnable: Called when the addon is enabled
 function Echovoice:OnEnable()
-    -- Initialize modules
+    -- Initialize core modules
     self.eventHandler = self:GetModule("EventHandler")
     self.metadataExtractor = self:GetModule("MetadataExtractor")
     self.communicationLayer = self:GetModule("CommunicationLayer")
@@ -84,15 +98,29 @@ function Echovoice:OnEnable()
     self.voiceMapping = self:GetModule("VoiceMapping")
     self.audioCache = self:GetModule("AudioCache")
     
+    -- Initialize UI modules
+    self.configUI = self:GetModule("ConfigUI")
+    self.subtitleUI = self:GetModule("SubtitleUI")
+    self.transcriptUI = self:GetModule("TranscriptUI")
+    self.minimapIcon = self:GetModule("MinimapIcon")
+    self.voiceCommands = self:GetModule("VoiceCommands")
+    
     -- Enable TTS modules first since other modules depend on them
     if self.audioCache then self.audioCache:Enable() end
     if self.voiceMapping then self.voiceMapping:Enable() end
     if self.ttsEngine then self.ttsEngine:Enable() end
     
-    -- Enable remaining modules
+    -- Enable core modules
     if self.communicationLayer then self.communicationLayer:Enable() end
     if self.metadataExtractor then self.metadataExtractor:Enable() end
     if self.eventHandler then self.eventHandler:Enable() end
+    
+    -- Enable UI modules last
+    if self.configUI then self.configUI:Enable() end
+    if self.subtitleUI then self.subtitleUI:Enable() end
+    if self.transcriptUI then self.transcriptUI:Enable() end
+    if self.minimapIcon then self.minimapIcon:Enable() end
+    if self.voiceCommands then self.voiceCommands:Enable() end
     
     Utils:LogInfo("Echovoice enabled.")
 end
@@ -100,9 +128,20 @@ end
 -- OnDisable: Called when the addon is disabled
 function Echovoice:OnDisable()
     -- Disable modules in reverse order of enabling
+    
+    -- Disable UI modules first
+    if self.voiceCommands then self.voiceCommands:Disable() end
+    if self.minimapIcon then self.minimapIcon:Disable() end
+    if self.transcriptUI then self.transcriptUI:Disable() end
+    if self.subtitleUI then self.subtitleUI:Disable() end
+    if self.configUI then self.configUI:Disable() end
+    
+    -- Disable core modules
     if self.eventHandler then self.eventHandler:Disable() end
     if self.metadataExtractor then self.metadataExtractor:Disable() end
     if self.communicationLayer then self.communicationLayer:Disable() end
+    
+    -- Disable TTS modules last
     if self.ttsEngine then self.ttsEngine:Disable() end
     if self.voiceMapping then self.voiceMapping:Disable() end
     if self.audioCache then self.audioCache:Disable() end
@@ -164,8 +203,11 @@ end
 
 -- OpenConfigUI: Open the configuration UI
 function Echovoice:OpenConfigUI()
-    Utils:LogInfo("Configuration UI not yet implemented.")
-    -- Will be implemented in Phase 5
+    if self.configUI then
+        self.configUI:OpenConfig()
+    else
+        Utils:LogWarning("Configuration UI module not available.")
+    end
 end
 
 -- Test: Run test function for debugging
@@ -188,7 +230,7 @@ function Echovoice:Test()
         self.ttsEngine:Test()
     end
     
-    -- Test other modules
+    -- Test core modules
     if self.communicationLayer then
         Utils:LogInfo("Testing CommunicationLayer module...")
         self.communicationLayer:Test()
@@ -202,6 +244,32 @@ function Echovoice:Test()
     if self.eventHandler then
         Utils:LogInfo("Testing EventHandler module...")
         self.eventHandler:Test()
+    end
+    
+    -- Test UI modules
+    if self.configUI then
+        Utils:LogInfo("Testing ConfigUI module...")
+        self.configUI:Test()
+    end
+    
+    if self.subtitleUI then
+        Utils:LogInfo("Testing SubtitleUI module...")
+        self.subtitleUI:Test()
+    end
+    
+    if self.transcriptUI then
+        Utils:LogInfo("Testing TranscriptUI module...")
+        self.transcriptUI:Test()
+    end
+    
+    if self.minimapIcon then
+        Utils:LogInfo("Testing MinimapIcon module...")
+        self.minimapIcon:Test()
+    end
+    
+    if self.voiceCommands then
+        Utils:LogInfo("Testing VoiceCommands module...")
+        self.voiceCommands:Test()
     end
     
     Utils:LogInfo("Test complete.")

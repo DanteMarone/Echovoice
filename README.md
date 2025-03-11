@@ -66,8 +66,8 @@ Echovoice is a World of Warcraft addon designed to transform the way you experie
 - **Phase 1:** Project Planning & Setup (Completed)
 - **Phase 2:** WoW Addon Development (Event hooking, metadata extraction) (Completed)
 - **Phase 3:** TTS Engine Integration & Voice Mapping (Completed)
-- **Phase 4:** Companion Application Development & Communication Setup
-- **Phase 5:** User Interface Customization & Accessibility Enhancements
+- **Phase 4:** Companion Application Development & Communication Setup (Completed)
+- **Phase 5:** User Interface Customization & Accessibility Enhancements (Completed)
 - **Phase 6:** Integration, Testing, and Performance Optimization
 - **Phase 7:** Compliance, Security Audits, and Final Polish
 

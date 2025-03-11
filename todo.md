@@ -51,31 +51,31 @@ This document outlines all the tasks required to develop a fully functional addo
 ---
 
 ## 4. Companion Application (Windows)
-- [ ] **Companion App Development**
-  - [ ] Build a lightweight app to handle heavy TTS processing outside WoW's sandbox.
-  - [ ] Ensure compatibility with Windows 11.
-- [ ] **Local Communication Protocol**
-  - [ ] Develop secure protocols (e.g., named pipes, local sockets) for data exchange.
-- [ ] **Audio Playback & Synchronization**
-  - [ ] Implement robust audio playback synchronized with in-game events.
-  - [ ] Include features such as volume adjustment and environmental effects.
-- [ ] **Error Handling & Fallbacks**
-  - [ ] Provide error management for TTS failures.
-  - [ ] Implement fallback strategies (e.g., revert to text display).
+- [x] **Companion App Development**
+  - [x] Build a lightweight app to handle heavy TTS processing outside WoW's sandbox.
+  - [x] Ensure compatibility with Windows 11.
+- [x] **Local Communication Protocol**
+  - [x] Develop secure protocols (e.g., named pipes, local sockets) for data exchange.
+- [x] **Audio Playback & Synchronization**
+  - [x] Implement robust audio playback synchronized with in-game events.
+  - [x] Include features such as volume adjustment and environmental effects.
+- [x] **Error Handling & Fallbacks**
+  - [x] Provide error management for TTS failures.
+  - [x] Implement fallback strategies (e.g., revert to text display).
 
 ---
 
 ## 5. User Interface & Customization
-- [ ] **In-Game Configuration Panel**
-  - [ ] Design a user-friendly UI for toggling features (quest narration, chat reading).
-  - [ ] Integrate settings for voice customization (volume, speed, pitch).
-- [ ] **Advanced Options**
-  - [ ] Allow selection between local and cloud TTS.
-  - [ ] Implement filters for chat channels and event prioritization.
-  - [ ] Provide auto-pausing options during combat or high-stress gameplay.
-- [ ] **Accessibility Features**
-  - [ ] Integrate subtitles/transcripts alongside audio output.
-  - [ ] Enable voice prompt commands for pause, repeat, and skip functions.
+- [x] **In-Game Configuration Panel**
+  - [x] Design a user-friendly UI for toggling features (quest narration, chat reading).
+  - [x] Integrate settings for voice customization (volume, speed, pitch).
+- [x] **Advanced Options**
+  - [x] Allow selection between local and cloud TTS.
+  - [x] Implement filters for chat channels and event prioritization.
+  - [x] Provide auto-pausing options during combat or high-stress gameplay.
+- [x] **Accessibility Features**
+  - [x] Integrate subtitles/transcripts alongside audio output.
+  - [x] Enable voice prompt commands for pause, repeat, and skip functions.
 
 ---
 

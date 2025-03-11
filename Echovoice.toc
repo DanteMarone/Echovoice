@@ -30,5 +30,12 @@ Modules\TTS\Engine.lua
 Modules\TTS\VoiceMapping.lua
 Modules\TTS\AudioCache.lua
 
+# UI
+UI\ConfigUI.lua
+UI\SubtitleUI.lua
+UI\TranscriptUI.lua
+UI\MinimapIcon.lua
+UI\VoiceCommands.lua
+
 # Initialize
 Initialize.lua
