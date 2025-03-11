@@ -70,12 +70,14 @@ Echovoice is a World of Warcraft addon designed to transform the way you experie
 ## Contributing
 Contributions, suggestions, and feedback are welcome! Please see our [CONTRIBUTING.md](CONTRIBUTING.md) file for guidelines on how to contribute to Echovoice.
 
+## Acknowledgements
+- **Special Thanks:**  
+  We would like to express our gratitude to **Claude** and **ChatGPT** for their invaluable assistance throughout the project planning phase. Their support helped shape this addon with modern design patterns and innovative ideas.
+- **Created with Vibe Coding:**  
+  This project was built with the principles of vibe coding, ensuring a flexible, creative, and user-focused development process.
+
 ## License
 Echovoice is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
-
-## Acknowledgements
-- Special thanks to the WoW addon development community for their extensive documentation and resources.
-- Gratitude to the teams behind the Windows Speech API and Ace3 framework.
 
 ---
 
