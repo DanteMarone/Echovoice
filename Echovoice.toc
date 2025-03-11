@@ -26,6 +26,9 @@ Core\Core.lua
 Modules\EventHandler.lua
 Modules\MetadataExtractor.lua
 Modules\CommunicationLayer.lua
+Modules\TTS\Engine.lua
+Modules\TTS\VoiceMapping.lua
+Modules\TTS\AudioCache.lua
 
 # Initialize
 Initialize.lua

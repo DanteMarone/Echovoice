@@ -13,11 +13,15 @@ Echovoice is a World of Warcraft addon designed to transform the way you experie
 - **Local & Cloud TTS Options:**  
   Uses the Windows Speech API for responsive local processing, with an optional premium cloud-based TTS service for ultra-realistic voices.
 - **Companion Application:**  
-  A dedicated Windows 11 application handles heavy TTS processing outside of WoW’s sandbox, ensuring smooth performance.
+  A dedicated Windows 11 application handles heavy TTS processing outside of WoW's sandbox, ensuring smooth performance.
 - **Audio Caching & Asynchronous Processing:**  
   Caches frequently-used phrases to reduce latency, with non-blocking TTS conversion.
+- **Voice Customization:**  
+  Adjust voice parameters (volume, speed, pitch) and create custom voice mappings for specific races or NPCs.
+- **Intelligent Voice Selection:**  
+  Automatically selects appropriate voices based on NPC characteristics, with race-specific modulation to enhance immersion.
 - **User Interface & Customization:**  
-  An in-game configuration panel allows for toggling features, adjusting voice parameters (volume, speed, pitch), and setting advanced options.
+  An in-game configuration panel allows for toggling features, adjusting voice parameters, and setting advanced options.
 - **Accessibility Enhancements:**  
   Supports subtitles, transcripts, and voice commands for a fully accessible experience.
 
@@ -60,8 +64,8 @@ Echovoice is a World of Warcraft addon designed to transform the way you experie
 
 ## Roadmap
 - **Phase 1:** Project Planning & Setup (Completed)
-- **Phase 2:** WoW Addon Development (Event hooking, metadata extraction)
-- **Phase 3:** TTS Engine Integration & Voice Mapping
+- **Phase 2:** WoW Addon Development (Event hooking, metadata extraction) (Completed)
+- **Phase 3:** TTS Engine Integration & Voice Mapping (Completed)
 - **Phase 4:** Companion Application Development & Communication Setup
 - **Phase 5:** User Interface Customization & Accessibility Enhancements
 - **Phase 6:** Integration, Testing, and Performance Optimization

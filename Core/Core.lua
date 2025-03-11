@@ -25,9 +25,13 @@ local defaults = {
         tts = {
             useLocal = true, -- Use local TTS by default
             useCloud = false, -- Cloud TTS is off by default
+            cloudApiKey = "", -- API key for cloud TTS service
+            cloudEndpoint = "https://api.tts.cloud/synthesize", -- Default cloud endpoint
             cacheEnabled = true,
             cacheSize = 100, -- Number of cached phrases
+            autoFallback = true, -- Automatically fall back to local TTS if cloud fails
         },
+        customVoices = {}, -- Custom voice mappings by race/gender
         filters = {
             quest = {
                 ignoreRepeatableQuests = false,
@@ -51,6 +55,9 @@ local defaults = {
 Echovoice.eventHandler = nil
 Echovoice.metadataExtractor = nil
 Echovoice.communicationLayer = nil
+Echovoice.ttsEngine = nil
+Echovoice.voiceMapping = nil
+Echovoice.audioCache = nil
 
 -- OnInitialize: Called when the addon is loaded
 function Echovoice:OnInitialize()
@@ -73,21 +80,32 @@ function Echovoice:OnEnable()
     self.eventHandler = self:GetModule("EventHandler")
     self.metadataExtractor = self:GetModule("MetadataExtractor")
     self.communicationLayer = self:GetModule("CommunicationLayer")
+    self.ttsEngine = self:GetModule("TTSEngine")
+    self.voiceMapping = self:GetModule("VoiceMapping")
+    self.audioCache = self:GetModule("AudioCache")
     
-    -- Enable modules
-    if self.eventHandler then self.eventHandler:Enable() end
-    if self.metadataExtractor then self.metadataExtractor:Enable() end
+    -- Enable TTS modules first since other modules depend on them
+    if self.audioCache then self.audioCache:Enable() end
+    if self.voiceMapping then self.voiceMapping:Enable() end
+    if self.ttsEngine then self.ttsEngine:Enable() end
+    
+    -- Enable remaining modules
     if self.communicationLayer then self.communicationLayer:Enable() end
+    if self.metadataExtractor then self.metadataExtractor:Enable() end
+    if self.eventHandler then self.eventHandler:Enable() end
     
     Utils:LogInfo("Echovoice enabled.")
 end
 
 -- OnDisable: Called when the addon is disabled
 function Echovoice:OnDisable()
-    -- Disable modules
+    -- Disable modules in reverse order of enabling
     if self.eventHandler then self.eventHandler:Disable() end
     if self.metadataExtractor then self.metadataExtractor:Disable() end
     if self.communicationLayer then self.communicationLayer:Disable() end
+    if self.ttsEngine then self.ttsEngine:Disable() end
+    if self.voiceMapping then self.voiceMapping:Disable() end
+    if self.audioCache then self.audioCache:Disable() end
     
     Utils:LogInfo("Echovoice disabled.")
 end
@@ -154,9 +172,26 @@ end
 function Echovoice:Test()
     Utils:LogInfo("Running Echovoice test...")
     
-    if self.eventHandler then
-        Utils:LogInfo("Testing EventHandler module...")
-        self.eventHandler:Test()
+    -- Test TTS modules
+    if self.audioCache then
+        Utils:LogInfo("Testing AudioCache module...")
+        self.audioCache:Test()
+    end
+    
+    if self.voiceMapping then
+        Utils:LogInfo("Testing VoiceMapping module...")
+        self.voiceMapping:Test()
+    end
+    
+    if self.ttsEngine then
+        Utils:LogInfo("Testing TTSEngine module...")
+        self.ttsEngine:Test()
+    end
+    
+    -- Test other modules
+    if self.communicationLayer then
+        Utils:LogInfo("Testing CommunicationLayer module...")
+        self.communicationLayer:Test()
     end
     
     if self.metadataExtractor then
@@ -164,9 +199,9 @@ function Echovoice:Test()
         self.metadataExtractor:Test()
     end
     
-    if self.communicationLayer then
-        Utils:LogInfo("Testing CommunicationLayer module...")
-        self.communicationLayer:Test()
+    if self.eventHandler then
+        Utils:LogInfo("Testing EventHandler module...")
+        self.eventHandler:Test()
     end
     
     Utils:LogInfo("Test complete.")

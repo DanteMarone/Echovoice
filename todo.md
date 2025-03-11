@@ -35,18 +35,18 @@ This document outlines all the tasks required to develop a fully functional addo
 ---
 
 ## 3. TTS Engine Integration
-- [ ] **Engine Research & Selection**
-  - [ ] Evaluate local TTS engines (e.g., Windows Speech API) vs. cloud-based TTS.
-  - [ ] Decide on primary and fallback TTS options based on quality and latency.
-- [ ] **TTS Processing Module**
-  - [ ] Develop an asynchronous module to handle TTS conversion.
-  - [ ] Ensure non-blocking operation to avoid in-game lag.
-- [ ] **Voice Mapping Engine**
-  - [ ] Create a database/mapping of NPC metadata to voice parameters.
-  - [ ] Allow customization and future voice pack extensions.
-- [ ] **Audio Caching**
-  - [ ] Implement caching for common phrases to reduce processing delays.
-  - [ ] Design cache invalidation and update strategies.
+- [x] **Engine Research & Selection**
+  - [x] Evaluate local TTS engines (e.g., Windows Speech API) vs. cloud-based TTS.
+  - [x] Decide on primary and fallback TTS options based on quality and latency.
+- [x] **TTS Processing Module**
+  - [x] Develop an asynchronous module to handle TTS conversion.
+  - [x] Ensure non-blocking operation to avoid in-game lag.
+- [x] **Voice Mapping Engine**
+  - [x] Create a database/mapping of NPC metadata to voice parameters.
+  - [x] Allow customization and future voice pack extensions.
+- [x] **Audio Caching**
+  - [x] Implement caching for common phrases to reduce processing delays.
+  - [x] Design cache invalidation and update strategies.
 
 ---
 

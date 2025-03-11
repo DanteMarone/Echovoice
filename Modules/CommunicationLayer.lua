@@ -116,25 +116,125 @@ function CommunicationLayer:SendTextForNarration(text, npcID, npcName, npcRace, 
         return
     end
     
-    -- Create message with metadata
+    -- Prepare metadata for TTS processing
+    local metadata = {
+        npcID = npcID,
+        npcName = npcName,
+        npcRace = npcRace,
+        npcGender = npcGender,
+        timestamp = GetServerTime(),
+    }
+    
+    -- First, check audio cache
+    local voiceParams = {
+        volume = Echovoice.db.profile.voice.volume,
+        speed = Echovoice.db.profile.voice.speed,
+        pitch = Echovoice.db.profile.voice.pitch,
+    }
+    
+    -- Try to get voice from the voice mapping system
+    if Echovoice.voiceMapping then
+        local voice = Echovoice.voiceMapping:GetVoice(npcRace, npcGender)
+        if voice then
+            voiceParams.voice = voice
+        end
+        
+        -- Get modulation parameters
+        local modParams = Echovoice.voiceMapping:GetModulationParams(npcRace)
+        if modParams then
+            voiceParams.pitch = voiceParams.pitch * modParams.pitch
+            voiceParams.speed = voiceParams.speed * modParams.speed
+        end
+    end
+    
+    -- Check the cache first
+    local cachedAudio = nil
+    if Echovoice.audioCache then
+        cachedAudio = Echovoice.audioCache:Get(text, voiceParams)
+    end
+    
+    if cachedAudio then
+        -- Use cached audio
+        Utils:LogDebug("Using cached audio for: %s", text:sub(1, 30) .. "...")
+        
+        -- In a real implementation, this would trigger audio playback
+        -- Since we're simulating, we'll just log the action
+        Utils:LogInfo("Playing cached audio: \"%s\"", text)
+        
+        return
+    end
+    
+    -- No cached audio found, process with TTS engine
+    if Echovoice.ttsEngine then
+        Utils:LogDebug("Sending to TTS engine: %s", text:sub(1, 30) .. "...")
+        
+        Echovoice.ttsEngine:ProcessText(text, metadata, function(success, audioData, error)
+            if success and audioData then
+                -- Cache the result
+                if Echovoice.audioCache then
+                    Echovoice.audioCache:Add(text, voiceParams, audioData)
+                end
+                
+                -- In a real implementation, this would trigger audio playback
+                Utils:LogInfo("TTS generated audio playing: \"%s\"", text)
+            else
+                Utils:LogError("TTS processing failed: %s", error or "Unknown error")
+            end
+        end)
+        
+        return
+    end
+    
+    -- Fallback if TTS engine isn't available
+    -- Create message with metadata for direct sending
     local message = {
         id = self:GetNextMessageId(),
+        type = "tts_request",
         text = text,
-        metadata = {
-            npcID = npcID,
-            npcName = npcName,
-            npcRace = npcRace,
-            npcGender = npcGender,
-            timestamp = GetServerTime(),
-        },
-        settings = {
-            volume = Echovoice.db.profile.voice.volume,
-            speed = Echovoice.db.profile.voice.speed,
-            pitch = Echovoice.db.profile.voice.pitch,
-        },
+        metadata = metadata,
+        settings = voiceParams,
     }
     
     Utils:LogDebug("Prepared message for narration: %s", text:sub(1, 30) .. "...")
+    
+    -- If connected, send the message directly
+    if isConnected then
+        self:SendMessage(message)
+    else
+        -- Otherwise, queue the message and try to connect
+        self:QueueMessage(message)
+        self:Connect()
+    end
+end
+
+-- Send message to companion app with a specific type and callback
+function CommunicationLayer:SendToCompanion(messageType, data, callback)
+    if not messageType or not data then
+        Utils:LogWarning("Missing parameters in SendToCompanion call")
+        return
+    end
+    
+    -- Create message with the specified type
+    local message = {
+        id = self:GetNextMessageId(),
+        type = messageType,
+        data = data,
+    }
+    
+    -- Store callback for this message ID if provided
+    if callback then
+        -- In a real implementation, this would store the callback to be called when response is received
+        Utils:LogDebug("Callback registered for message %d", message.id)
+        
+        -- For demonstration, simulate a delayed response
+        C_Timer.After(0.5, function()
+            local response = {
+                success = true,
+                audioData = "Simulated audio data for message " .. message.id,
+            }
+            callback(response)
+        end)
+    end
     
     -- If connected, send the message directly
     if isConnected then
